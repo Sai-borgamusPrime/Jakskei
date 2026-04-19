@@ -6,25 +6,35 @@ function MatchCard({
   status,
   homeLogo,
   awayLogo,
+  date,
+  time,
 }) {
   return (
     <article className="match-card">
-      <div className="match-card__top">
-        <div className="team-block">
-          <img src={homeLogo} alt={homeTeam} className="team-logo" />
-          <p className="team-name">{homeTeam}</p>
+      <div className="match-card-top">
+        <div className="match-datetime">
+          <span className="match-date">{date}</span>
+          <span className="match-time">{time}</span>
         </div>
 
-        <div className="score-block">
-          <h3 className="score-text">
-            {homeScore} - {awayScore}
-          </h3>
-          <span className="live-badge">{status}</span>
+        <span className={`match-status ${status.toLowerCase()}`}>{status}</span>
+      </div>
+
+      <div className="match-card-body">
+        <div className="team-block">
+          <img src={homeLogo} alt={homeTeam} className="team-logo" />
+          <span className="team-name">{homeTeam}</span>
+        </div>
+
+        <div className="match-score">
+          <span>{homeScore}</span>
+          <span className="score-divider">:</span>
+          <span>{awayScore}</span>
         </div>
 
         <div className="team-block">
           <img src={awayLogo} alt={awayTeam} className="team-logo" />
-          <p className="team-name">{awayTeam}</p>
+          <span className="team-name">{awayTeam}</span>
         </div>
       </div>
 

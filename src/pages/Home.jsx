@@ -8,6 +8,11 @@ import "./Home.css";
 function Home() {
   const [activeTab, setActiveTab] = useState("live");
 
+  const filteredMatches =
+    activeTab === "live"
+      ? matches.filter((match) => match.status === "Live")
+      : matches.filter((match) => match.status !== "Live");
+
   return (
     <main className="home-page">
       <section className="home-shell">
@@ -42,7 +47,7 @@ function Home() {
           </h2>
 
           <div className="matches-list">
-            {matches.map((match) => (
+            {filteredMatches.map((match) => (
               <MatchCard key={match.id} {...match} />
             ))}
           </div>
