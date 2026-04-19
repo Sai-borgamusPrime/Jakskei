@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Splash.css";
+import { Link } from "react-router-dom";
 
 function Splash() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function Splash() {
             className="splash-logo"
           />
 
-         <img
+          <img
             src="/logo.png"
             alt="Jukskei Tournament Logo"
             className="logo-aura"
@@ -28,19 +29,21 @@ function Splash() {
 
         <div className="splash-powered">
           <p>Powered By</p>
-          <img 
+          <img
             src="/schoemans-logo.png"
             alt="Schoemans Logo"
             className="sponsor-logo"
           />
         </div>
 
-        <button
-          className="splash-button"
-          onClick={() => navigate("/splash2")}
-        >
+        <button className="splash-button" onClick={() => navigate("/splash2")}>
           Login <span aria-hidden="true">→</span>
         </button>
+
+        <Link to="/splash2" className="auth-link">
+          Don’t have an account?{" "}
+          <span className="signup-highlight">Sign up</span>
+        </Link>
       </section>
     </main>
   );

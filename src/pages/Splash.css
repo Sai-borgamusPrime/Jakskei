@@ -49,8 +49,30 @@ background:
   width: min(100vw, 450px);
   height: auto;
   display: block;
+
+  /* Animation + interaction */
+  animation: float 3s ease-in-out infinite;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Hover effect */
+.splash-logo:hover {
+  transform: scale(1.05) translateY(-5px);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+}
 .logo-aura {
   position: absolute;
   width: 540px;
@@ -144,6 +166,43 @@ background:
 
 .splash-button:active {
   transform: scale(0.98);
+}
+
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 12px 18px;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #5f8ff3, #4c84ef);
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-link {
+  font-size: 14px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Highlighted "Sign up" */
+.signup-highlight {
+  color: #b8860b; /* dark yellow */
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+/* Hover effect */
+.auth-link:hover .signup-highlight {
+  color: #d3d3d3; /* light grey */
 }
 
 @media (min-width: 768px) {
