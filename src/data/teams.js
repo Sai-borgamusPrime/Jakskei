@@ -4,8 +4,8 @@ const teams = [
     slug: "plattelanders",
     name: "Plattelanders",
     color: "Green",
-    logo: "/tech-wizards-logo.png",
-    bannerLogo: "/tech-wizards-logo.png",
+    logo: "/schoemans-mark.png",
+    bannerLogo: "/schoemans-mark.png",
     schedule: [
       {
         id: 1,
@@ -54,8 +54,8 @@ const teams = [
     slug: "sAJJR",
     name: "SAJJR",
     color: "Orange",
-    logo: "/ombu-logo.png",
-    bannerLogo: "/ombu-logo.png",
+    logo: "/ombu-logo.jpg",
+    bannerLogo: "/ombu-logo.jpg", 
     schedule: [
       {
         id: 1,
@@ -86,8 +86,8 @@ const teams = [
     slug: "draft-warriors",
     name: "Draft Warriors",
     color: "Black",
-    logo: "/windhoek-logo.png",
-    bannerLogo: "/windhoek-logo.png",
+    logo: "/windhoek-logo.jpg",
+    bannerLogo: "/windhoek-logo.jpg",
     schedule: [
       {
         id: 1,

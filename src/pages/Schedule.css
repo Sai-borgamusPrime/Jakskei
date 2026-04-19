@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   padding: 24px 16px;
-  padding-bottom: 10px;
+  padding-bottom: 100px;
 }
 
 .schedule-shell {
@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
+  padding-bottom: 80px
 }
 
 .schedule-header {
