@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Splash from "./pages/Splash";
 import Splash2 from "./pages/Splash2";
-import Splash3 from "./pages/Splash3";
 import Home from "./pages/Home";
 import Schedule from "./pages/Schedule";
 import Teams from "./pages/Teams";
@@ -18,7 +17,6 @@ function App() {
     <Routes>
       <Route path="/" element={<Splash />} />
       <Route path="/splash2" element={<Splash2 />} />
-      <Route path="/splash3" element={<Splash3 />} />
       <Route path="/home" element={<Home />} />
       <Route path="/schedule" element={<Schedule />} />
       <Route path="/teams" element={<Teams />} />

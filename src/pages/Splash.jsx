@@ -37,7 +37,7 @@ function Splash() {
         </div>
 
         <button className="splash-button" onClick={() => navigate("/splash2")}>
-          Login <span aria-hidden="true">→</span>
+          Get Started <span aria-hidden="true">→</span>
         </button>
 
         <Link to="/splash2" className="auth-link">
