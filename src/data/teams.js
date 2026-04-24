@@ -4,6 +4,8 @@ const teams = [
     slug: "paaltjie_jagters",
     name: "Paaltjie Jagters",
     color: "Green",
+    division: "A",
+    totalScore: 18,
     logo: "/Paaltjie Jagters - Logo.png",
     bannerLogo: "/Paaltjie Jagters - Logo.png",
     schedule: [
@@ -26,6 +28,8 @@ const teams = [
     slug: "goue-oues",
     name: "Goue Oues",
     color: "Yellow",
+    division: "A",
+    totalScore: 24,
     logo: "/Goue Oues - Logo.png",
     bannerLogo: "/Goue Oues - Logo.png",
     schedule: [
@@ -54,8 +58,10 @@ const teams = [
     slug: "SJJR",
     name: "SJJR",
     color: "Orange",
+    division: "B",
+    totalScore: 15,
     logo: "/SJJR - Logo.png",
-    bannerLogo: "/SJJR - Logo.png", 
+    bannerLogo: "/SJJR - Logo.png",
     schedule: [
       {
         id: 1,
@@ -70,6 +76,8 @@ const teams = [
     slug: "policie-a",
     name: "Policie A",
     color: "Red",
+    division: "A",
+    totalScore: 12,
     logo: "/Police - Logo.png",
     bannerLogo: "/Police - Logo.png",
     schedule: [
@@ -86,6 +94,8 @@ const teams = [
     slug: "gansbaai",
     name: "Gansbaai",
     color: "Black",
+    division: "B",
+    totalScore: 21,
     logo: "/Gansbaai - Logo.png",
     bannerLogo: "/Gansbaai - Logo.png",
     schedule: [
@@ -102,6 +112,8 @@ const teams = [
     slug: "jukskei-sa",
     name: "Jukskei SA",
     color: "Black",
+    division: "B",
+    totalScore: 9,
     logo: "/Jukskei SA - Logo.png",
     bannerLogo: "/Jukskei SA - Logo.png",
     schedule: [

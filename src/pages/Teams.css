@@ -6,7 +6,6 @@
   justify-content: center;
   padding: 24px 16px;
   padding-bottom: 100px;
-
 }
 
 .teams-shell {
@@ -14,7 +13,7 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
-  padding-bottom: 80px
+  padding-bottom: 80px;
 }
 
 .teams-header {
@@ -24,7 +23,7 @@
 }
 
 .teams-title {
-  font-family: 'Dela Gothic One', sans-serif;
+  font-family: "Dela Gothic One", sans-serif;
   font-size: 2rem;
   font-weight: 900;
   color: #000;
@@ -51,14 +50,40 @@
 
 .page-heading {
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #111;
   margin-bottom: 12px;
 }
 
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.tab {
+  border: 1px solid #d5d8de;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+  border-radius: 999px;
+  min-width: 52px;
+  height: 32px;
+  padding: 0 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
+}
+
+.tab.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
 .search-bar {
-  height: 38px;
-  background: #dcdcdc;
+  height: 40px;
+  background: linear-gradient(180deg, #eeeeee, #dedede);
   border-radius: 999px;
   display: grid;
   grid-template-columns: 1fr auto auto;
@@ -66,6 +91,7 @@
   padding: 0 12px 0 14px;
   gap: 8px;
   margin-bottom: 16px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.7);
 }
 
 .search-bar input {
@@ -91,75 +117,218 @@
 .teams-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
 }
 
 .team-row-card {
-  background: #f7f7f7;
-  border: 1px solid #bfc3c8;
-  border-radius: 12px;
-  padding: 14px 14px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  min-height: 76px;
+  border: 1px solid rgba(190, 196, 205, 0.9);
+  border-radius: 20px;
+  padding: 12px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(245, 247, 250, 0.92)),
+    #fff;
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
   display: grid;
-  grid-template-columns: 24px 1fr auto;
+  grid-template-columns: 34px 1fr auto;
   align-items: center;
   gap: 10px;
   width: 100%;
   text-align: left;
   cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.team-row-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  opacity: 0.95;
+}
+
+.team-row-card::after {
+  content: "";
+  position: absolute;
+  top: -35px;
+  right: -35px;
+  width: 90px;
+  height: 90px;
+  border-radius: 999px;
+  background: rgba(23, 105, 255, 0.08);
 }
 
 .team-row-card:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .team-row-card:active {
-  transform: scale(0.99);
+  transform: scale(0.985);
 }
 
-.team-number {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #111;
+.rank-pill {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 900;
+  z-index: 1;
+}
+
+.team-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  z-index: 1;
+}
+
+.team-logo-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.team-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.team-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
 }
 
 .team-row-name {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #202020;
+  font-size: 0.86rem;
+  font-weight: 900;
+  color: #141414;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.team-badge {
-  min-width: 54px;
-  height: 18px;
-  padding: 0 8px;
+.team-meta {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #7c828c;
+}
+
+.score-area {
+  min-width: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  color: #111;
+  z-index: 1;
+}
+
+.score-label {
+  font-size: 0.58rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #8b929c;
+}
+
+.team-score-badge {
+  min-width: 44px;
+  height: 26px;
+  padding: 0 10px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.62rem;
-  font-weight: 700;
+  font-size: 0.78rem;
+  font-weight: 900;
   color: #fff;
+  background: #1769ff;
+  box-shadow: 0 6px 14px rgba(23, 105, 255, 0.28);
 }
 
-.team-badge.green {
-  background: #39c659;
+.rank-gold::before {
+  background: #d4af37;
 }
 
-.team-badge.yellow {
-  background: #f2c200;
+.rank-gold .rank-pill,
+.rank-gold .team-score-badge {
+  background: linear-gradient(135deg, #f8d75c, #d4af37);
+  color: #1f1600;
+  box-shadow: 0 8px 18px rgba(212, 175, 55, 0.36);
 }
 
-.team-badge.orange {
-  background: #ff962f;
+.rank-gold .score-area svg {
+  color: #d4af37;
 }
 
-.team-badge.red {
-  background: #ff3b30;
+.rank-silver::before {
+  background: #bfc3ca;
 }
 
-.team-badge.black {
-  background: #111;
+.rank-silver .rank-pill,
+.rank-silver .team-score-badge {
+  background: linear-gradient(135deg, #f0f2f5, #bfc3ca);
+  color: #111;
+  box-shadow: 0 8px 18px rgba(165, 170, 178, 0.36);
+}
+
+.rank-silver .score-area svg {
+  color: #9da3ad;
+}
+
+.rank-bronze::before {
+  background: #cd7f32;
+}
+
+.rank-bronze .rank-pill,
+.rank-bronze .team-score-badge {
+  background: linear-gradient(135deg, #e8a45f, #cd7f32);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(205, 127, 50, 0.34);
+}
+
+.rank-bronze .score-area svg {
+  color: #cd7f32;
+}
+
+.rank-blue::before {
+  background: #1769ff;
+}
+
+.rank-blue .rank-pill {
+  background: #101828;
+}
+
+.rank-blue .team-score-badge {
+  background: #1769ff;
 }
 
 @media (min-width: 768px) {

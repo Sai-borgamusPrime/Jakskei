@@ -54,18 +54,17 @@ function TeamDetails() {
 
         <div className="team-tabs">
           <button
+            className={`team-tab ${activeTab === "past" ? "active" : ""}`}
+            onClick={() => setActiveTab("past")}
+          >
+            <span>Past Matches</span>
+          </button>
+          <button
             className={`team-tab ${activeTab === "live" ? "active" : ""}`}
             onClick={() => setActiveTab("live")}
           >
             <Radio size={14} strokeWidth={2.2} />
             <span>Live</span>
-          </button>
-
-          <button
-            className={`team-tab ${activeTab === "past" ? "active" : ""}`}
-            onClick={() => setActiveTab("past")}
-          >
-            <span>Past Matches</span>
           </button>
         </div>
 
