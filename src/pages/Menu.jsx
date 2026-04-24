@@ -8,12 +8,21 @@ function Menu() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = ["All", "Lunch", "Snacks", "Drinks"];
+  const categories = [
+    "All",
+    "Everyday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Special Events",
+  ];
 
   const filteredItems = useMemo(() => {
     return menuItems.filter((item) => {
       const matchesCategory =
-        activeCategory === "All" || item.category === activeCategory;
+        activeCategory === "All" || item.categories?.includes(activeCategory);
 
       const matchesQuery = item.name
         .toLowerCase()
@@ -84,7 +93,7 @@ function Menu() {
 
                   <p className="menu-card-time">
                     <span className="menu-time-dot"></span>
-                    {item.prepTime} min
+                    {item.DOW}
                   </p>
 
                   <p className="menu-card-price">N${item.price.toFixed(2)}</p>
