@@ -277,6 +277,14 @@ function Schedule() {
     .filter((event) => event.date === selectedDateKey)
     .sort((a, b) => a.time.localeCompare(b.time));
 
+  const monthEvents = events.filter((event) => {
+    const eventDate = new Date(event.date);
+    return (
+      eventDate.getMonth() === currentMonth &&
+      eventDate.getFullYear() === currentYear
+    );
+  });
+
   const goToPreviousMonth = () => {
     if (currentMonth === 0) {
       setCurrentMonth(11);
@@ -371,17 +379,39 @@ function Schedule() {
     <main className="schedule-page">
       <section className="schedule-shell">
         <header className="schedule-header">
-          <h1 className="schedule-title">JUKSKEI</h1>
+          <div>
+            <h1 className="schedule-title">JUKSKEI</h1>
+            <p className="schedule-kicker">Toernooi Program</p>
+          </div>
 
           <ThemeToggle />
         </header>
 
-        <section className="schedule-section">
-          <h2 className="page-heading">Match Schedule</h2>
+        <section className="schedule-hero">
+          <div>
+            <p className="schedule-eyebrow">Event Calendar</p>
+            <h2 className="page-heading">Match Schedule</h2>
+            <p className="schedule-hero-text">
+              Blaai deur toernooi-datums, sien daaglikse geleenthede en werk
+              programbesonderhede by.
+            </p>
+          </div>
 
+          <div className="schedule-summary-card">
+            <span>{monthEvents.length}</span>
+            <p>events this month</p>
+          </div>
+        </section>
+
+        <section className="schedule-layout">
           <div className="calendar-card">
             <div className="calendar-controls">
-              <button className="icon-btn" onClick={goToPreviousMonth}>
+              <button
+                className="icon-btn"
+                onClick={goToPreviousMonth}
+                type="button"
+                aria-label="Previous month"
+              >
                 <ChevronLeft size={16} />
               </button>
 
@@ -409,7 +439,12 @@ function Schedule() {
                 ))}
               </select>
 
-              <button className="icon-btn" onClick={goToNextMonth}>
+              <button
+                className="icon-btn"
+                onClick={goToNextMonth}
+                type="button"
+                aria-label="Next month"
+              >
                 <ChevronRight size={16} />
               </button>
             </div>
@@ -437,6 +472,7 @@ function Schedule() {
                         : ""
                     }`}
                     onClick={() => selectDay(day)}
+                    type="button"
                   >
                     {day}
 
@@ -453,72 +489,87 @@ function Schedule() {
             </div>
           </div>
 
-          <p className="today-label">
-            SELECTED DATE {displayDate(selectedDate)}
-          </p>
+          <section className="events-panel">
+            <div className="selected-date-row">
+              <div>
+                <p className="today-label">SELECTED DATE</p>
+                <h3>{displayDate(selectedDate)}</h3>
+              </div>
 
-          <form className="event-form" onSubmit={addEvent}>
-            <input
-              type="time"
-              value={newEvent.time}
-              onChange={(e) =>
-                setNewEvent({ ...newEvent, time: e.target.value })
-              }
-            />
+              <span className="selected-count">
+                {selectedEvents.length}{" "}
+                {selectedEvents.length === 1 ? "event" : "events"}
+              </span>
+            </div>
 
-            <input
-              type="text"
-              placeholder="Add match or event"
-              value={newEvent.title}
-              onChange={(e) =>
-                setNewEvent({ ...newEvent, title: e.target.value })
-              }
-            />
+            <form className="event-form" onSubmit={addEvent}>
+              <input
+                type="time"
+                value={newEvent.time}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, time: e.target.value })
+                }
+              />
 
-            <input
-              type="text"
-              placeholder="Location"
-              value={newEvent.location}
-              onChange={(e) =>
-                setNewEvent({ ...newEvent, location: e.target.value })
-              }
-            />
+              <input
+                type="text"
+                placeholder="Add match or event"
+                value={newEvent.title}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, title: e.target.value })
+                }
+              />
 
-            <button type="submit" aria-label="Add event">
-              <Plus size={16} />
-            </button>
-          </form>
+              <input
+                type="text"
+                placeholder="Location"
+                value={newEvent.location}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, location: e.target.value })
+                }
+              />
 
-          <div className="schedule-list">
-            {selectedEvents.length === 0 ? (
-              <p className="empty-events">No events for this date.</p>
-            ) : (
-              selectedEvents.map((item) => (
-                <article
-                  key={item.id}
-                  className="schedule-card"
-                  onClick={() => openEventModal(item)}
-                >
-                  <div className={`schedule-dot ${item.color}`}></div>
+              <button type="submit" aria-label="Add event">
+                <Plus size={16} />
+              </button>
+            </form>
 
-                  <div className="schedule-card-content">
-                    <p className="schedule-time">{item.time}</p>
-                    <p className="schedule-match">{item.title}</p>
+            <div className="schedule-list">
+              {selectedEvents.length === 0 ? (
+                <p className="empty-events">No events for this date.</p>
+              ) : (
+                selectedEvents.map((item) => (
+                  <article
+                    key={item.id}
+                    className="schedule-card"
+                    onClick={() => openEventModal(item)}
+                  >
+                    <div className={`schedule-dot ${item.color}`}></div>
 
-                    {item.location && (
-                      <p className="schedule-location">{item.location}</p>
-                    )}
-                  </div>
-                </article>
-              ))
-            )}
-          </div>
+                    <div className="schedule-card-content">
+                      <p className="schedule-time">{item.time}</p>
+                      <p className="schedule-match">{item.title}</p>
+
+                      {item.location && (
+                        <p className="schedule-location">{item.location}</p>
+                      )}
+                    </div>
+                  </article>
+                ))
+              )}
+            </div>
+          </section>
         </section>
 
         {selectedEvent && (
           <div className="modal-overlay">
             <div className="event-modal">
-              <button className="modal-close" onClick={closeEventModal}>
+              <button
+                className="modal-close"
+                onClick={closeEventModal}
+                type="button"
+                aria-label="Close modal"
+              >
                 <X size={18} />
               </button>
 

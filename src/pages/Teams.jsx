@@ -39,52 +39,82 @@ function Teams() {
     <main className="teams-page">
       <section className="teams-shell">
         <header className="teams-header">
-          <h1 className="teams-title">JUKSKEI</h1>
+          <div>
+            <h1 className="teams-title">JUKSKEI</h1>
+            <p className="teams-kicker">Spanranglys</p>
+          </div>
 
           <ThemeToggle />
         </header>
 
-        <section className="teams-section">
-          <h2 className="teams-page-heading">Teams</h2>
-
-          <div className="tabs">
-            <button
-              className={`tab ${activeTab === "All Teams" ? "active" : ""}`}
-              onClick={() => setActiveTab("All Teams")}
-            >
-              All
-            </button>
-
-            <button
-              className={`tab ${activeTab === "A" ? "active" : ""}`}
-              onClick={() => setActiveTab("A")}
-            >
-              Division A
-            </button>
-
-            <button
-              className={`tab ${activeTab === "B" ? "active" : ""}`}
-              onClick={() => setActiveTab("B")}
-            >
-              Division B
-            </button>
+        <section className="teams-hero">
+          <div>
+            <p className="teams-eyebrow">Tournament Rankings</p>
+            <h2 className="teams-page-heading">Teams</h2>
+            <p className="teams-hero-text">
+              Blaai deur afdelings, soek spanne en sien ranglyste gebaseer op
+              totale telling.
+            </p>
           </div>
 
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
+          <div className="teams-summary-card">
+            <span>{filteredTeams.length}</span>
+            <p>{filteredTeams.length === 1 ? "team shown" : "teams shown"}</p>
+          </div>
+        </section>
 
-            <button className="search-icon-btn" aria-label="Filter">
-              <SlidersHorizontal size={16} />
-            </button>
+        <section className="teams-section">
+          <div className="teams-toolbar">
+            <div className="tabs" role="tablist" aria-label="Team divisions">
+              <button
+                type="button"
+                className={`tab ${activeTab === "All Teams" ? "active" : ""}`}
+                onClick={() => setActiveTab("All Teams")}
+              >
+                All
+              </button>
 
-            <button className="search-icon-btn" aria-label="Search">
-              <Search size={16} />
-            </button>
+              <button
+                type="button"
+                className={`tab ${activeTab === "A" ? "active" : ""}`}
+                onClick={() => setActiveTab("A")}
+              >
+                Division A
+              </button>
+
+              <button
+                type="button"
+                className={`tab ${activeTab === "B" ? "active" : ""}`}
+                onClick={() => setActiveTab("B")}
+              >
+                Division B
+              </button>
+            </div>
+
+            <div className="search-bar">
+              <input
+                type="text"
+                placeholder="Search teams"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+
+              <button
+                className="search-icon-btn"
+                type="button"
+                aria-label="Filter"
+              >
+                <SlidersHorizontal size={16} />
+              </button>
+
+              <button
+                className="search-icon-btn"
+                type="button"
+                aria-label="Search"
+              >
+                <Search size={16} />
+              </button>
+            </div>
           </div>
 
           <div className="teams-list">

@@ -18,32 +18,53 @@ function Home() {
     <main className="home-page">
       <section className="home-shell">
         <header className="home-header">
-          <h1 className="home-title">JUKSKEI</h1>
+          <div>
+            <h1 className="home-title">JUKSKEI</h1>
+            <p className="home-kicker">Toernooi Wedstrydsentrum</p>
+          </div>
 
           <ThemeToggle />
         </header>
 
-        <div className="home-tabs">
-          <button
-            className={`tab-button ${activeTab === "live" ? "active" : ""}`}
-            onClick={() => setActiveTab("live")}
-          >
-            <Radio size={14} strokeWidth={2.2} />
-            <span>Live</span>
-          </button>
+        <section className="home-hero">
+          <div className="home-hero-content">
+            <p className="home-eyebrow">Live Scoreboard</p>
+            <h2 className="home-hero-title">
+              Volg die nuutste Jukskei-wedstryde in reële tyd.
+            </h2>
+          </div>
 
-          <button
-            className={`tab-button ${activeTab === "past" ? "active" : ""}`}
-            onClick={() => setActiveTab("past")}
-          >
-            <span>Past Matches</span>
-          </button>
-        </div>
+          <div className="home-tabs" role="tablist" aria-label="Match filters">
+            <button
+              className={`tab-button ${activeTab === "live" ? "active" : ""}`}
+              onClick={() => setActiveTab("live")}
+              type="button"
+            >
+              <Radio size={14} strokeWidth={2.2} />
+              <span>Live</span>
+            </button>
+
+            <button
+              className={`tab-button ${activeTab === "past" ? "active" : ""}`}
+              onClick={() => setActiveTab("past")}
+              type="button"
+            >
+              <span>Past Matches</span>
+            </button>
+          </div>
+        </section>
 
         <section className="matches-section">
-          <h2 className="section-title">
-            {activeTab === "live" ? "Live Matches" : "Past Matches"}
-          </h2>
+          <div className="section-heading-row">
+            <h2 className="section-title">
+              {activeTab === "live" ? "Live Matches" : "Past Matches"}
+            </h2>
+
+            <span className="match-count">
+              {filteredMatches.length}{" "}
+              {filteredMatches.length === 1 ? "match" : "matches"}
+            </span>
+          </div>
 
           <div className="matches-list">
             {filteredMatches.map((match) => (

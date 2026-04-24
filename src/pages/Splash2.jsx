@@ -10,13 +10,13 @@ function Splash2() {
   const slides = useMemo(
     () => [
       {
-        image: "/player.jpeg",
+        image: "/player.png",
         alt: "Jukskei Player",
         title: "Welkom by Jukskei 25",
         text: "Vier 25 jaar van jukskei-uitnemendheid en passie. Volg wedstryde, skedules en beleef die toernooi op een plek.",
       },
       {
-        image: "/family.jpeg",
+        image: "/family.png",
         alt: "Jukskei Family",
         title: "Jukskei Familie",
         text: "Viering van sport, gemeenskap en samewerking. Geniet die toernooi en wees deel van die jukskei-erfenis.",
@@ -77,52 +77,65 @@ function Splash2() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <img
-        src={currentSlide.image}
-        alt={currentSlide.alt}
-        className="splash2-image"
-      />
+      <div className="splash2-background">
+        {slides.map((slide, index) => (
+          <img
+            key={slide.title}
+            src={slide.image}
+            alt={slide.alt}
+            className={`splash2-image ${
+              index === currentIndex ? "is-active" : ""
+            }`}
+          />
+        ))}
+      </div>
 
       <div className="splash2-fade" />
 
       <section className="splash2-content">
-        <h1>{currentSlide.title}</h1>
-        <p>{currentSlide.text}</p>
+        <div className="splash2-copy">
+          <p className="splash2-eyebrow">Jukskei Tournament</p>
 
-        <div className="splash2-slider-controls" aria-label="Splash slides">
-          <div
-            className="splash2-dots"
-            role="tablist"
-            aria-label="Slide picker"
-          >
-            {slides.map((slide, index) => (
-              <button
-                key={slide.title}
-                type="button"
-                className={`splash2-dot ${
-                  index === currentIndex ? "is-active" : ""
-                }`}
-                onClick={() => goToSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-                aria-selected={index === currentIndex}
-                role="tab"
-              />
-            ))}
+          <h1>{currentSlide.title}</h1>
+          <p>{currentSlide.text}</p>
+
+          <div className="splash2-slider-controls" aria-label="Splash slides">
+            <div
+              className="splash2-dots"
+              role="tablist"
+              aria-label="Slide picker"
+            >
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.title}
+                  type="button"
+                  className={`splash2-dot ${
+                    index === currentIndex ? "is-active" : ""
+                  }`}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                  aria-selected={index === currentIndex}
+                  role="tab"
+                />
+              ))}
+            </div>
           </div>
         </div>
 
-        <button
-          type="button"
-          className="splash2-login-button"
-          onClick={() => navigate("/home")}
-        >
-          Login →
-        </button>
+        <div className="splash2-actions">
+          <button
+            type="button"
+            className="splash2-login-button"
+            onClick={() => navigate("/home")}
+          >
+            Login →
+          </button>
 
-        <Link to="/splash2" className="auth-link2">
-          Don’t have an account?{" "}
-          <span className="signup-highlight2">Sign up</span>
-        </Link>
+          <Link to="/splash2" className="auth-link2">
+            Don’t have an account?{" "}
+            <span className="signup-highlight2">Sign up</span>
+          </Link>
+        </div>
       </section>
     </main>
   );

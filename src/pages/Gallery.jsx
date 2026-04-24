@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Gallery.css";
 import galleryImages from "../data/galleryImages";
 import BottomNav from "../components/BottomNav";
-import { Upload, Trash2, Star, X, ArrowLeft } from "lucide-react";
+import { Upload, Trash2, Star, X, ArrowLeft, Images } from "lucide-react";
 import ThemeToggle from "../components/ThemeToggle";
 
 function Gallery() {
@@ -11,6 +11,11 @@ function Gallery() {
   const [fullscreenImage, setFullscreenImage] = useState(null);
 
   const activeCategory = categories.find((cat) => cat.id === activeCategoryId);
+
+  const totalImages = categories.reduce(
+    (total, category) => total + category.images.length,
+    0,
+  );
 
   const handleUpload = (categoryId, event) => {
     const files = Array.from(event.target.files);
@@ -79,18 +84,31 @@ function Gallery() {
     <main className="gallery-page">
       <section className="gallery-shell">
         <header className="gallery-header">
-          <h1 className="gallery-title">JUKSKEI</h1>
+          <div>
+            <h1 className="gallery-title">JUKSKEI</h1>
+            <p className="gallery-kicker">Toernooi Herinneringe</p>
+          </div>
 
           <ThemeToggle />
         </header>
 
         {!activeCategory ? (
           <>
-            <h2 className="page-heading">Gallery</h2>
+            <section className="gallery-hero">
+              <div>
+                <p className="gallery-eyebrow">Photo Gallery</p>
+                <h2 className="page-heading">Gallery</h2>
+                <p className="gallery-subtitle">
+                  Kyk na hoogtepunte, span-oomblikke en geleentheidsfoto’s.
+                </p>
+              </div>
 
-            <p className="gallery-subtitle">
-              View highlights, team moments and event photos.
-            </p>
+              <div className="gallery-summary-card">
+                <Images size={22} />
+                <span>{totalImages}</span>
+                <p>{totalImages === 1 ? "photo" : "photos"}</p>
+              </div>
+            </section>
 
             <section className="gallery-grid">
               {categories.map((item) => (
@@ -98,6 +116,7 @@ function Gallery() {
                   key={item.id}
                   className="gallery-card"
                   onClick={() => setActiveCategoryId(item.id)}
+                  type="button"
                 >
                   <img src={item.coverImage} alt={item.title} />
 
@@ -116,13 +135,15 @@ function Gallery() {
             <button
               className="gallery-back-button"
               onClick={() => setActiveCategoryId(null)}
+              type="button"
             >
               <ArrowLeft size={18} />
               Back to Gallery
             </button>
 
-            <div className="category-header">
+            <section className="category-header">
               <div>
+                <p className="gallery-eyebrow">Category</p>
                 <h2 className="page-heading">{activeCategory.title}</h2>
                 <p className="gallery-subtitle">
                   Upload, preview, delete, or set a cover image.
@@ -139,7 +160,7 @@ function Gallery() {
                   onChange={(event) => handleUpload(activeCategory.id, event)}
                 />
               </label>
-            </div>
+            </section>
 
             <section className="category-image-grid">
               {activeCategory.images.length === 0 ? (
@@ -175,19 +196,23 @@ function Gallery() {
 
                       <div className="image-actions">
                         <button
+                          type="button"
                           onClick={() =>
                             setCoverImage(activeCategory.id, image.id)
                           }
                           title="Set as cover"
+                          aria-label="Set as cover"
                         >
                           <Star size={16} />
                         </button>
 
                         <button
+                          type="button"
                           onClick={() =>
                             deleteImage(activeCategory.id, image.id)
                           }
                           title="Delete image"
+                          aria-label="Delete image"
                         >
                           <Trash2 size={16} />
                         </button>
@@ -208,6 +233,8 @@ function Gallery() {
           <button
             className="fullscreen-close"
             onClick={() => setFullscreenImage(null)}
+            type="button"
+            aria-label="Close fullscreen image"
           >
             <X size={24} />
           </button>

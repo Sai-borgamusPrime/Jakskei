@@ -4,21 +4,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
   overflow: hidden;
-background:
-  radial-gradient(
-    circle at 50% 40%,
-    rgba(60, 100, 220, 0.10) 0%,
-    rgba(60, 100, 220, 0.06) 25%,
-    rgba(60, 100, 220, 0.03) 45%,
-    transparent 65%
-  ),
-  linear-gradient(
-    180deg,
-    #0a2f8f 0%,
-    #001a4d 100%
-  );
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(60, 100, 220, 0.1) 0%,
+      rgba(60, 100, 220, 0.06) 25%,
+      rgba(60, 100, 220, 0.03) 45%,
+      transparent 65%
+    ),
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.11), transparent 34rem),
+    radial-gradient(circle at bottom right, rgba(255, 179, 0, 0.12), transparent 30rem),
+    linear-gradient(180deg, #0a2f8f 0%, #001a4d 100%);
 }
 
 .splash-content {
@@ -35,6 +34,24 @@ background:
   text-align: center;
 }
 
+.splash-main,
+.splash-side {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.splash-main {
+  gap: 1.4rem;
+}
+
+.splash-side {
+  gap: 1.4rem;
+  width: 100%;
+}
+
 .logo-block {
   position: relative;
   width: 100%;
@@ -49,30 +66,31 @@ background:
   width: min(100vw, 450px);
   height: auto;
   display: block;
-
-  /* Animation + interaction */
   animation: float 3s ease-in-out infinite;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
 }
 
-/* Floating animation */
 @keyframes float {
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0);
   }
 }
 
-/* Hover effect */
 .splash-logo:hover {
   transform: scale(1.05) translateY(-5px);
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
 }
+
 .logo-aura {
   position: absolute;
   width: 540px;
@@ -132,6 +150,38 @@ background:
   top: calc(50% - 68px);
 }
 
+.splash-text {
+  display: none;
+  max-width: 620px;
+  color: #fff;
+}
+
+.splash-eyebrow {
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.splash-heading {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.4rem, 6vw, 5.8rem);
+  font-weight: 950;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.splash-subtitle {
+  max-width: 560px;
+  margin: 18px auto 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 .splash-powered {
   display: flex;
   flex-direction: column;
@@ -162,58 +212,182 @@ background:
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.splash-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.28);
+  filter: brightness(1.04);
 }
 
 .splash-button:active {
   transform: scale(0.98);
 }
 
-.cta-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-
-  padding: 12px 18px;
-  border-radius: 10px;
-
-  background: linear-gradient(135deg, #5f8ff3, #4c84ef);
-  color: #ffffff;
-
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
 .auth-link {
   font-size: 14px;
-  color: #ffffff ;
+  color: #ffffff;
   text-decoration: none;
 }
 
-/* Highlighted "Sign up" */
 .signup-highlight {
-  color: #b8860b; /* dark yellow */
-  font-weight: 600;
+  color: #f8d75c;
+  font-weight: 700;
   transition: color 0.2s ease;
 }
 
-/* Hover effect */
 .auth-link:hover .signup-highlight {
-  color: #d3d3d3; /* light grey */
+  color: #d3d3d3;
 }
 
 @media (min-width: 768px) {
   .splash-content {
-    max-width: 430px;
+    max-width: 760px;
     margin: 0 auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 3.5rem 2rem;
+    gap: 2rem;
   }
 
   .splash-logo {
-    width: 250px;
+    width: 300px;
+  }
+
+  .splash-text {
+    display: block;
+  }
+
+  .splash-powered p {
+    font-size: 1.15rem;
+  }
+
+  .sponsor-logo {
+    width: 220px;
+  }
+
+  .splash-button {
+    width: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .splash-content {
+    max-width: 1120px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    align-items: center;
+    gap: 4rem;
+    text-align: left;
+  }
+
+  .splash-main {
+    align-items: flex-start;
+  }
+
+  .logo-block {
+    justify-content: flex-start;
+  }
+
+  .splash-logo {
+    width: 360px;
+  }
+
+  .splash-text {
+    text-align: left;
+  }
+
+  .splash-subtitle {
+    margin-left: 0;
+  }
+
+  .splash-side {
+    min-height: 460px;
+    justify-content: center;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 36px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
+  }
+}
+
+@media (min-width: 1440px) {
+  .splash-content {
+    max-width: 1320px;
+    gap: 6rem;
+  }
+
+  .splash-logo {
+    width: 430px;
+  }
+
+  .splash-side {
+    min-height: 520px;
+  }
+
+  .sponsor-logo {
+    width: 260px;
+  }
+
+  .splash-button {
+    width: 340px;
+    height: 58px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .splash-content {
+    max-width: 1680px;
+    gap: 8rem;
+  }
+
+  .splash-logo {
+    width: 520px;
+  }
+
+  .splash-side {
+    min-height: 600px;
+  }
+
+  .splash-heading {
+    font-size: 6.4rem;
+  }
+
+  .splash-subtitle {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 768px) {
+  .splash-content {
+    padding-block: 2rem;
+    gap: 1.2rem;
+  }
+
+  .splash-logo {
+    width: 240px;
+  }
+
+  .splash-heading {
+    font-size: clamp(2rem, 5vw, 4rem);
+  }
+
+  .splash-side {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

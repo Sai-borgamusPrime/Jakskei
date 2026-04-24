@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Search, ShoppingBag } from "lucide-react";
 import { useMemo, useState } from "react";
 import BottomNav from "../components/BottomNav";
 import ThemeToggle from "../components/ThemeToggle";
@@ -28,51 +28,78 @@ function Shop() {
     <main className="shop-page">
       <section className="shop-shell">
         <header className="shop-header">
-          <h1 className="shop-title">JUKSKEI</h1>
+          <div>
+            <h1 className="shop-title">JUKSKEI</h1>
+            <p className="shop-kicker">Toernooi Handelsware</p>
+          </div>
 
           <div className="shop-header-actions">
             <ThemeToggle />
           </div>
         </header>
 
-        <section className="shop-section">
-          <h2 className="shop-page-heading">Gift Shop</h2>
-
-          <div className="shop-search-bar">
-            <input
-              type="text"
-              placeholder="Search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-
-            <button className="shop-search-icon-btn" aria-label="Search">
-              <Search size={16} strokeWidth={2.2} />
-            </button>
+        <section className="shop-hero">
+          <div>
+            <p className="shop-eyebrow">Gift Store</p>
+            <h2 className="shop-page-heading">Gift Shop</h2>
+            <p className="shop-hero-text">
+              Blaai deur amptelike geleentheidsware, aandenkinge en
+              toernooi-bykomstighede.
+            </p>
           </div>
 
-          <div className="shop-category-row">
-            {categories.map((category) => (
+          <div className="shop-summary-card">
+            <ShoppingBag size={22} />
+            <span>{filteredItems.length}</span>
+            <p>{filteredItems.length === 1 ? "item shown" : "items shown"}</p>
+          </div>
+        </section>
+
+        <section className="shop-section">
+          <div className="shop-toolbar">
+            <div className="shop-search-bar">
+              <input
+                type="text"
+                placeholder="Search shop"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+
               <button
-                key={category}
-                className={`shop-category-btn ${
-                  activeCategory === category ? "active" : ""
-                }`}
-                onClick={() => setActiveCategory(category)}
+                className="shop-search-icon-btn"
+                type="button"
+                aria-label="Search"
               >
-                {category}
+                <Search size={16} strokeWidth={2.2} />
               </button>
-            ))}
+            </div>
+
+            <div className="shop-category-row">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  className={`shop-category-btn ${
+                    activeCategory === category ? "active" : ""
+                  }`}
+                  onClick={() => setActiveCategory(category)}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="shop-grid">
             {filteredItems.map((item) => (
               <article key={item.id} className="shop-card">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="shop-card-image"
-                />
+                <div className="shop-image-wrap">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="shop-card-image"
+                  />
+                </div>
 
                 <div className="shop-card-body">
                   <p className="shop-card-price">N${item.price.toFixed(2)}</p>

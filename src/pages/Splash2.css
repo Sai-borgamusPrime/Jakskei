@@ -7,65 +7,100 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-top: calc(env(safe-area-inset-top, 0px) + 16px);
-  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  padding:
+    calc(env(safe-area-inset-top, 0px) + 16px)
+    calc(env(safe-area-inset-right, 0px) + 16px)
+    calc(env(safe-area-inset-bottom, 0px) + 16px)
+    calc(env(safe-area-inset-left, 0px) + 16px);
   box-sizing: border-box;
   touch-action: pan-y;
+  background: #001a4d;
 }
 
-/* Background image */
+.splash2-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
 .splash2-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
   z-index: 0;
-  transition: opacity 0.4s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 7s ease;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-/* White fade at bottom */
-.splash2-fade {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 65%;
-  background: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 1) 10%,
-    rgba(255, 255, 255, 0.9) 30%,
-    rgba(255, 255, 255, 0.6) 55%,
-    rgba(255, 255, 255, 0.2) 75%,
-    transparent 100%
-  );
-  z-index: 1;
+.splash2-image.is-active {
+  opacity: 1;
+  transform: scale(1.04);
 }
 
-/* Content section */
+.splash2-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 1) 7%,
+      rgba(255, 255, 255, 0.94) 25%,
+      rgba(255, 255, 255, 0.68) 48%,
+      rgba(255, 255, 255, 0.18) 72%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(0, 26, 77, 0.2),
+      transparent 45%,
+      rgba(0, 26, 77, 0.2)
+    );
+}
+
 .splash2-content {
   position: relative;
   z-index: 2;
   width: 100%;
   max-width: 420px;
-  padding: 32px 20px 30px; /* extra top padding for dots */
+  padding: 32px 20px 30px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.splash2-copy {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-/* Slider controls (TOP LEFT ABOVE TITLE) */
+.splash2-eyebrow {
+  display: none;
+  margin: 0;
+  color: #2f6fff;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .splash2-slider-controls {
   position: absolute;
   top: 0;
-  left: 20px;
-  transform: translateY(-18px);
+  left: 0;
+  transform: translateY(-22px);
   z-index: 3;
 }
 
-/* Dots */
 .splash2-dots {
   display: flex;
   gap: 8px;
@@ -78,24 +113,28 @@
   border-radius: 999px;
   background: rgba(17, 17, 17, 0.25);
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    width 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
   padding: 0;
 }
 
 .splash2-dot.is-active {
+  width: 26px;
   background: #2f6fff;
-  transform: scale(1.15);
+  transform: scale(1.05);
 }
 
-/* Heading */
 .splash2-content h1 {
   font-size: clamp(1.3rem, 4vw, 1.6rem);
-  font-weight: 700;
+  font-weight: 800;
   color: #111;
   margin: 0;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
 }
 
-/* Paragraph */
 .splash2-content p {
   font-size: 0.95rem;
   color: #444;
@@ -103,7 +142,12 @@
   margin: 0;
 }
 
-/* Login button */
+.splash2-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
 .splash2-login-button {
   margin-top: 10px;
   height: 48px;
@@ -111,14 +155,19 @@
   border-radius: 12px;
   background: linear-gradient(90deg, #3f7cff, #2f6fff);
   color: #ffffff;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 12px 26px rgba(47, 111, 255, 0.28);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
 }
 
 .splash2-login-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(47, 111, 255, 0.25);
+  box-shadow: 0 12px 24px rgba(47, 111, 255, 0.34);
+  filter: brightness(1.04);
 }
 
 .splash2-login-button:active {
@@ -130,7 +179,6 @@
   outline-offset: 2px;
 }
 
-/* Auth link */
 .auth-link2 {
   font-size: 14px;
   color: #000000;
@@ -139,21 +187,172 @@
   line-height: 1.4;
 }
 
-/* Highlighted "Sign up" */
 .signup-highlight2 {
   color: #b8860b;
-  font-weight: 600;
+  font-weight: 700;
   transition: color 0.2s ease;
 }
 
-/* Hover effect */
-.auth-link:hover .signup-highlight {
-  color: #d3d3d3;
+.auth-link2:hover .signup-highlight2 {
+  color: #2f6fff;
 }
 
-/* Desktop refinement */
 @media (min-width: 768px) {
+  .splash2-page {
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+
+  .splash2-fade {
+    background:
+      linear-gradient(
+        to right,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.96) 28%,
+        rgba(255, 255, 255, 0.64) 52%,
+        rgba(255, 255, 255, 0.16) 78%,
+        transparent 100%
+      ),
+      linear-gradient(
+        to top,
+        rgba(0, 26, 77, 0.18),
+        transparent 45%,
+        rgba(0, 26, 77, 0.16)
+      );
+  }
+
   .splash2-content {
-    padding: 40px 32px 30px;
+    max-width: 760px;
+    width: 100%;
+    min-height: 560px;
+    padding: 40px;
+    justify-content: flex-end;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 36px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 30px 80px rgba(0, 26, 77, 0.22);
+  }
+
+  .splash2-copy {
+    max-width: 520px;
+  }
+
+  .splash2-eyebrow {
+    display: block;
+  }
+
+  .splash2-slider-controls {
+    position: static;
+    transform: none;
+    order: -1;
+    margin-bottom: 12px;
+  }
+
+  .splash2-content h1 {
+    font-size: clamp(2.5rem, 7vw, 4.6rem);
+  }
+
+  .splash2-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .splash2-actions {
+    max-width: 340px;
+    width: 100%;
+  }
+
+  .splash2-login-button {
+    height: 54px;
+    border-radius: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .splash2-page {
+    justify-content: flex-start;
+    padding: 40px;
+  }
+
+  .splash2-content {
+    max-width: 520px;
+    min-height: calc(100vh - 80px);
+  }
+
+  .splash2-content h1 {
+    font-size: clamp(3.2rem, 5vw, 5rem);
+  }
+
+  .splash2-image {
+    object-position: center;
+  }
+}
+
+@media (min-width: 1440px) {
+  .splash2-page {
+    padding: 56px;
+  }
+
+  .splash2-content {
+    max-width: 600px;
+    padding: 52px;
+  }
+
+  .splash2-content h1 {
+    font-size: 5.4rem;
+  }
+
+  .splash2-content p {
+    font-size: 1.08rem;
+  }
+
+  .splash2-actions {
+    max-width: 380px;
+  }
+
+  .splash2-login-button {
+    height: 58px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .splash2-page {
+    padding: 72px;
+  }
+
+  .splash2-content {
+    max-width: 700px;
+    padding: 64px;
+  }
+
+  .splash2-content h1 {
+    font-size: 6.4rem;
+  }
+
+  .splash2-content p {
+    font-size: 1.18rem;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 768px) {
+  .splash2-content {
+    min-height: calc(100vh - 64px);
+    padding: 32px;
+  }
+
+  .splash2-content h1 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Search, Utensils } from "lucide-react";
 import { useMemo, useState } from "react";
 import BottomNav from "../components/BottomNav";
 import ThemeToggle from "../components/ThemeToggle";
@@ -37,41 +37,66 @@ function Menu() {
     <main className="menu-page">
       <section className="menu-shell">
         <header className="menu-header">
-          <h1 className="menu-title">JUKSKEI</h1>
+          <div>
+            <h1 className="menu-title">JUKSKEI</h1>
+            <p className="menu-kicker">Kos en verversings</p>
+          </div>
 
           <div className="menu-header-actions">
             <ThemeToggle />
           </div>
         </header>
 
-        <section className="menu-section">
-          <h2 className="menu-page-heading">Menu</h2>
-
-          <div className="menu-search-bar">
-            <input
-              type="text"
-              placeholder="Search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-
-            <button className="menu-search-icon-btn" aria-label="Search">
-              <Search size={16} strokeWidth={2.2} />
-            </button>
+        <section className="menu-hero">
+          <div>
+            <p className="menu-eyebrow">Tournament Menu</p>
+            <h2 className="menu-page-heading">Menu</h2>
+            <p className="menu-hero-text">
+              Blaai deur etes, daaglikse spesiale aanbiedinge en kosopsies wat
+              tydens die toernooi beskikbaar is.
+            </p>
           </div>
 
-          <div className="menu-category-row">
-            {categories.map((category) => (
+          <div className="menu-summary-card">
+            <Utensils size={22} />
+            <span>{filteredItems.length}</span>
+            <p>{filteredItems.length === 1 ? "item shown" : "items shown"}</p>
+          </div>
+        </section>
+
+        <section className="menu-section">
+          <div className="menu-toolbar">
+            <div className="menu-search-bar">
+              <input
+                type="text"
+                placeholder="Search menu"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+
               <button
-                key={category}
-                className={`menu-category-btn ${
-                  activeCategory === category ? "active" : ""
-                }`}
-                onClick={() => setActiveCategory(category)}
+                className="menu-search-icon-btn"
+                type="button"
+                aria-label="Search"
               >
-                {category}
+                <Search size={16} strokeWidth={2.2} />
               </button>
-            ))}
+            </div>
+
+            <div className="menu-category-row">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  className={`menu-category-btn ${
+                    activeCategory === category ? "active" : ""
+                  }`}
+                  onClick={() => setActiveCategory(category)}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="menu-grid">
